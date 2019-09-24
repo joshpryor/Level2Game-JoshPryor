@@ -1,5 +1,5 @@
 import javax.swing.JFrame;
-
+//    hi
 public class WaveHub {
 
 	JFrame window = new JFrame();
