@@ -23,7 +23,7 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	
 	WavePanel(){
 		tim.start();
-		
+	
 	}
 	
 	public void testBounds() {
@@ -46,11 +46,6 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 			
 	}}
 	
-	public void enemyMovment() {
-		
-		
-		
-	}
 	
 	
 	
@@ -59,7 +54,9 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		emeny.movement();
 		repaint();
+		
 	}
 
 	@Override

@@ -1,3 +1,4 @@
+
 import javax.swing.JFrame;
 
 public class WaveHub {
@@ -15,7 +16,7 @@ public class WaveHub {
 		wavehub.method();
 	}
 	
-	void method() {
+	public void method() {
 	window.setVisible(true);
 	window.setSize(WIDTH, HEIGHT);
 	window.add(panal);
