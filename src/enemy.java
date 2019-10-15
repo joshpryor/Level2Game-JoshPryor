@@ -1,39 +1,66 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import javax.imageio.ImageIO;
 
 public class enemy {
-	public int speed = 5;
+	public int speed = 10;
 	public int eX = 100;
 	public int eY = 25;
-	public int Yspeed = eY += speed;
-	public int Xspeed = eX += speed;
+	public int Yspeed =  speed;
+	public int Xspeed =  speed;
+	public static BufferedImage image;
+	public static boolean needImage = true;
+	public static boolean gotImage = false;	
 
-	void draw(Graphics g){
-		g.setColor(Color.MAGENTA);
-		g.fillRect(eX, eY, 75, 75);
+	enemy(){
+		if (needImage) {
+		    loadImage ("apple2.jpg");
+		}
 		
 	}
 	
+	void draw(Graphics g){
+		g.setColor(Color.RED);
+		g.fillRect(eX , eY, 75, 75);
+		if (gotImage) {
+			g.drawImage(image, eX, eY, 75, 75, null);
+		} else {
+			g.setColor(Color.RED);
+			g.fillRect(eX, eY, 75, 75);
+		}
+	}
 	
+	void loadImage(String imageFile) {
+	    if (needImage) {
+	        try {
+	            image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+		    gotImage = true;
+	        } catch (Exception e) {
+	            
+	        }
+	        needImage = false;
+	    }
+	}
 	
 	void movement(){
 		
-		int X = eX;
-		int Y = eY;
+		eX += Xspeed;
+		eY += Yspeed;
 		
-		X = Xspeed;
-		Y = Yspeed;
+
 		
-		if (X >= WaveHub.WIDTH) {
+		if (eX >= WaveHub.WIDTH) {
 			Xspeed = -Xspeed;
 		}
-		if (X <= 0) {
+		if (eX <= 0) {
 			Xspeed = -Xspeed;
 		}
-		if (Y >= WaveHub.HEIGHT) {
+		if (eY >= WaveHub.HEIGHT) {
 			Yspeed = -Yspeed;
 		}
-		if (Y <= 0) {
+		if (eY <= 0) {
 			Yspeed = -Yspeed;
 		}
 		
