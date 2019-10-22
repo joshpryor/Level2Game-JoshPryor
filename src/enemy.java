@@ -5,11 +5,15 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class enemy {
+	public int fatness = 75;
 	public int speed = 10;
 	public int eX = 100;
 	public int eY = 25;
 	public int Yspeed =  speed;
 	public int Xspeed =  speed;
+	public int xmax = eX += fatness;
+	public int ymax = eY += fatness;
+
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
@@ -23,12 +27,12 @@ public class enemy {
 	
 	void draw(Graphics g){
 		g.setColor(Color.RED);
-		g.fillRect(eX , eY, 75, 75);
+		g.fillRect(eX , eY, fatness, fatness);
 		if (gotImage) {
-			g.drawImage(image, eX, eY, 75, 75, null);
+			g.drawImage(image, eX, eY, fatness, fatness, null);
 		} else {
 			g.setColor(Color.RED);
-			g.fillRect(eX, eY, 75, 75);
+			g.fillRect(eX, eY, fatness, fatness);
 		}
 	}
 	

@@ -19,6 +19,7 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	protected void paintComponent(Graphics g) {
 		emeny.draw(g);
 		user.draw(g);
+		impact();
 	}
 	
 	WavePanel(){
@@ -46,7 +47,15 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 			
 	}}
 	
-	
+	void impact() {
+		
+		if (user.pX >= emeny.eX && user.pX <= emeny.xmax && user.pY >= emeny.eY && user.pY <= emeny.ymax) {
+			System.out.println("yr mom,  ohohohhhhh   roasted");
+			
+		}
+	System.out.println(user.pX + " " + emeny.eX);
+		
+	}
 	
 	
 	
@@ -54,7 +63,9 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
 		emeny.movement();
+		impact();
 		repaint();
 		
 	}
@@ -80,7 +91,20 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             user.pY += user.speeed;   
 		}
+		else if (e.getKeyCode() == KeyEvent.VK_S) {
+            user.pY += user.speeed;   
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_W) {
+            user.pY -= user.speeed;   
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_D) {
+            user.pX += user.speeed;   
+		}
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+            user.pX -= user.speeed;   
+		}
 		testBounds();
+		impact();
 	}
 
 	@Override
