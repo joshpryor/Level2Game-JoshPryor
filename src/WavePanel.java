@@ -15,6 +15,8 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	Player user = new Player();
 	
 	Timer tim = new Timer(1000/60,this);
+	
+	public boolean bannana = false; 
         
 	protected void paintComponent(Graphics g) {
 		emeny.draw(g);
@@ -48,15 +50,22 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	}}
 	
 	void impact() {
-		
-		if (user.pX >= emeny.eX && user.pX <= emeny.xmax && user.pY >= emeny.eY && user.pY <= emeny.ymax) {
-			System.out.println("yr mom,  ohohohhhhh   roasted");
+
+		if (user.pX >= emeny.eX && user.pX <= emeny.eX+75 && user.pY >= emeny.eY && user.pY <= emeny.eY+75) {
+			bannana = true;
 			
 		}
-	System.out.println(user.pX + " " + emeny.eX);
+
+	}
+	void testImpact() {
+		if(bannana == true) {
+			System.out.println("you got mail,    from saten");
+			
+			
+		}
+		
 		
 	}
-	
 	
 	
 	
