@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -15,18 +16,33 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	Player user = new Player();
 	
 	Timer tim = new Timer(1000/60,this);
+	Timer timmy = new Timer(7000,this);
+	ArrayList<enemy> emenys = new ArrayList<enemy>(); 
+	
+	
 	
 	public boolean bannana = false; 
         
 	protected void paintComponent(Graphics g) {
-		emeny.draw(g);
+		for (int i = 0; i < emenys.size(); i++) {
+			emenys.get(i).draw(g);
+		}
+		
 		user.draw(g);
 		impact();
 	}
 	
+	//              Add another member variable aliens that will hold an ArrayList of Alien objects. Initialize this 
+	//              variable to an empty ArrayList. Add a member variable random and initialize it to a new Random object. 
+	//              Also create an addAlien() method that contains the code below.
+
+
+	//emenys.add(new enemy());
 	WavePanel(){
+		
 		tim.start();
-	
+	    timmy.start();
+	    emenys.add(emeny);
 	}
 	
 	public void testBounds() {
@@ -62,6 +78,7 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 			System.out.println("you got mail,    from saten");
 			
 			
+			bannana = false;
 		}
 		
 		
@@ -72,11 +89,18 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
-		emeny.movement();
-		impact();
-		repaint();
-		
+		if (e.getSource() == tim) {
+			//emeny.movement();
+			for (int i = 0; i < emenys.size(); i++) {
+				emenys.get(i).movement();
+			}
+			impact();
+			testImpact();
+			repaint();
+		}
+		else if(e.getSource() == timmy) {
+			emenys.add(new enemy());
+		}
 	}
 
 	@Override
