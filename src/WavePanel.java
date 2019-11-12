@@ -21,7 +21,7 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	
 	
 	
-	public boolean bannana = false; 
+
         
 	protected void paintComponent(Graphics g) {
 		for (int i = 0; i < emenys.size(); i++) {
@@ -40,9 +40,13 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	//emenys.add(new enemy());
 	WavePanel(){
 		
+		if (WaveHub.bruh ) {
+			
+		
 		tim.start();
 	    timmy.start();
 	    emenys.add(emeny);
+		}
 	}
 	
 	public void testBounds() {
@@ -68,20 +72,10 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	void impact() {
 
 		if (user.pX >= emeny.eX && user.pX <= emeny.eX+75 && user.pY >= emeny.eY && user.pY <= emeny.eY+75) {
-			bannana = true;
+			System.out.println("you got mail");
 			
 		}
 
-	}
-	void testImpact() {
-		if(bannana == true) {
-			System.out.println("you got mail,    from saten");
-			
-			
-			bannana = false;
-		}
-		
-		
 	}
 	
 	
@@ -95,7 +89,7 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 				emenys.get(i).movement();
 			}
 			impact();
-			testImpact();
+		
 			repaint();
 		}
 		else if(e.getSource() == timmy) {
