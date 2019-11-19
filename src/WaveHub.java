@@ -13,7 +13,7 @@ public class WaveHub {
 	
 	public static void main(String[] args) {
 		WaveHub wavehub = new WaveHub();
-		String intro = JOptionPane.showInputDialog("you can use the arrow keys to move or use ASWD,\n avoid enemys and dont hide in the corrners like a noob.\n type and enter anything to start");
+		String intro = JOptionPane.showInputDialog("Wave:  you can use the arrow keys to move or use ASWD,\n avoid enemys and dont hide in the corrners like a noob.\n type and enter anything to start");
 		if (intro.equals("no")) {
 			JOptionPane.showMessageDialog(null, "U suck");
 		}

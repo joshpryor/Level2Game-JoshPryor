@@ -1,4 +1,7 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -14,11 +17,13 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	enemy emeny = new enemy();
 	
 	Player user = new Player();
-	
+	int score = 0;
 	Timer tim = new Timer(1000/60,this);
+	
+	Font titleFont = new Font("Arial", Font.PLAIN, 48);
+	 
 	Timer timmy = new Timer(7000,this);
 	ArrayList<enemy> emenys = new ArrayList<enemy>(); 
-	
 	
 	
 
@@ -27,10 +32,14 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 		for (int i = 0; i < emenys.size(); i++) {
 			emenys.get(i).draw(g);
 		}
+		g.setFont(titleFont);
+		g.setColor(Color.YELLOW);
+		g.drawString( "score " + score , 100, 100);
 		
 		user.draw(g);
-		impact();
+		
 	}
+	
 	
 	//              Add another member variable aliens that will hold an ArrayList of Alien objects. Initialize this 
 	//              variable to an empty ArrayList. Add a member variable random and initialize it to a new Random object. 
@@ -69,32 +78,54 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 			
 	}}
 	
-	void impact() {
-
-		if (user.pX >= emeny.eX && user.pX <= emeny.eX+75 && user.pY >= emeny.eY && user.pY <= emeny.eY+75) {
-			System.out.println("you got mail");
-			
-		}
-
-	}
 	
 	
+	
+//	void impact(enemy emeny) {
+//
+//		
+//		
+//			
+//		
+//		
+//		if (user.pX >= emeny.eX && user.pX <= emeny.eX+75 && user.pY >= emeny.eY && user.pY <= emeny.eY+75) {
+//			JOptionPane.showMessageDialog(null, "you got mail");
+//			
+//		}
+//
+//	
+//	
+//	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		Rectangle player = new Rectangle(user.pX,user.pY,75,75);
 		// TODO Auto-generated method stub
 		if (e.getSource() == tim) {
 			//emeny.movement();
-			for (int i = 0; i < emenys.size(); i++) {
-				emenys.get(i).movement();
+			score += 1;
+			for (enemy emeny : emenys) {
+				emeny.movement();
+				Rectangle emenr = new Rectangle(emeny.eX,emeny.eY,75,75);
+				if (player.intersects(emenr)) {
+					JOptionPane.showMessageDialog(null, "you got mail");
+					tim.stop();
+					timmy.stop();
+				}
+				
 			}
-			impact();
+			
 		
 			repaint();
 		}
 		else if(e.getSource() == timmy) {
 			emenys.add(new enemy());
 		}
+	
+		
+		
+		
 	}
 
 	@Override
@@ -131,7 +162,7 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
             user.pX -= user.speeed;   
 		}
 		testBounds();
-		impact();
+		
 	}
 
 	@Override
