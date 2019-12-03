@@ -24,7 +24,7 @@ public class enemy {
 		}
 		
 	}
-	
+	public static String bob = Player.agatha;
 	void draw(Graphics g){
 		g.setColor(Color.RED);
 		g.fillRect(eX , eY, fatness, fatness);
@@ -70,7 +70,7 @@ public class enemy {
 		
 	}
 	
-	
+	public static String bobby = " Y = Y";
 	
 	
 	

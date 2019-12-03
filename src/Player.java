@@ -13,6 +13,7 @@ public class Player {
 	public int speeed = 50;
 	public int xxx = pX += fatness;
 	public int yyy = pY += fatness;
+	public static String agatha = enemy.bobby;
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	

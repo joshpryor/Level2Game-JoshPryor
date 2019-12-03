@@ -14,7 +14,7 @@ import javax.swing.Timer;
 
 public class WavePanel extends JPanel implements ActionListener, KeyListener {
 
-	enemy emeny = new enemy();
+	enemy emeny ;
 	
 	Player user = new Player();
 	int score = 0;
@@ -40,6 +40,18 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 		
 	}
 	
+	void start() {
+		 emenys = new ArrayList<enemy>();
+		 user = new Player();
+		 emeny = new enemy();
+		 tim.start();
+		    timmy.start();
+		    
+			if (WaveHub.bruh ) {
+		    emenys.add(emeny);
+			}
+	}
+	
 	
 	//              Add another member variable aliens that will hold an ArrayList of Alien objects. Initialize this 
 	//              variable to an empty ArrayList. Add a member variable random and initialize it to a new Random object. 
@@ -49,16 +61,12 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	//emenys.add(new enemy());
 	WavePanel(){
 		
-		if (WaveHub.bruh ) {
-			
-		
-		tim.start();
-	    timmy.start();
-	    emenys.add(emeny);
-		}
+		start();
 	}
 	
 	public void testBounds() {
+			
+		
 		int x = WaveHub.WIDTH - user.fatness;
 		int y = WaveHub.HEIGHT - user.fatness;
 		if (user.pX > x) {
@@ -75,10 +83,36 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		if (user.pY < 0) {
 			user.pY = 0;
-			
+		
 	}}
 	
+	public void noCorners(){
+		//bottom right
+		if (user.pX+75 >= WaveHub.WIDTH-45 && user.pY+75 >= WaveHub.HEIGHT-75) {
+			score -= 7;
+		}
+		//top left         working
+		else if (user.pX == 0 && user.pY == 0) {
+			score -= 7;
+		}
+		//bottom left
+		else if (user.pX == 0 && user.pY+75 >= WaveHub.HEIGHT-75) {
+			score -= 7;
+		}
+		//top right
+		else if (user.pX+75 >= WaveHub.WIDTH-65 && user.pY == 0) {
+			score -= 7;
+		}
+		
+		
+	}
 	
+	void restart() {
+		
+		score = 0;
+		start();
+		
+	}
 	
 	
 //	void impact(enemy emeny) {
@@ -99,31 +133,46 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		Rectangle player = new Rectangle(user.pX,user.pY,75,75);
 		// TODO Auto-generated method stub
+
 		if (e.getSource() == tim) {
 			//emeny.movement();
+			noCorners();
 			score += 1;
 			for (enemy emeny : emenys) {
 				emeny.movement();
 				Rectangle emenr = new Rectangle(emeny.eX,emeny.eY,75,75);
+				
+				if(WaveHub.shouldNotDie == false) {
+					
 				if (player.intersects(emenr)) {
-					JOptionPane.showMessageDialog(null, "you got mail");
 					tim.stop();
 					timmy.stop();
+					String restart = JOptionPane.showInputDialog(null, " type and enter aything to restart.\n your score was " + score );
+					if (restart.equals(null)) {
+						System.exit(0);
+					}
+					if (restart.equals("no")) {
+						JOptionPane.showMessageDialog(null, "U suck");
+					}
+					else {
+						restart();
+					}
 				}
 				
+				}
 			}
 			
 		
 			repaint();
 		}
+		
 		else if(e.getSource() == timmy) {
 			emenys.add(new enemy());
 		}
 	
-		
 		
 		
 	}
@@ -137,30 +186,19 @@ public class WavePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
                user.pX -= user.speeed;   
 		}
-		else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
             user.pX += user.speeed;   
 		}
-		else if (e.getKeyCode() == KeyEvent.VK_UP) {
+		else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
             user.pY -= user.speeed;   
 		}
-		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
             user.pY += user.speeed;   
 		}
-		else if (e.getKeyCode() == KeyEvent.VK_S) {
-            user.pY += user.speeed;   
-		}
-		else if (e.getKeyCode() == KeyEvent.VK_W) {
-            user.pY -= user.speeed;   
-		}
-		else if (e.getKeyCode() == KeyEvent.VK_D) {
-            user.pX += user.speeed;   
-		}
-		if (e.getKeyCode() == KeyEvent.VK_A) {
-            user.pX -= user.speeed;   
-		}
+		
 		testBounds();
 		
 	}
