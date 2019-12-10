@@ -15,7 +15,7 @@ public class WaveHub {
 	
 	public static void main(String[] args) {
 		WaveHub wavehub = new WaveHub();
-		String intro = JOptionPane.showInputDialog("Wave:  you can use the arrow keys to move or use ASWD,\n avoid enemys and trust me dont hide in the corrners.\n type and enter anything to start.\n take a picture of your score and send to (619)-548-3626");
+		String intro = JOptionPane.showInputDialog("Wave:  you can use the arrow keys to move or use ASWD,\n avoid enemys and trust me dont hide in the corrners.\n type and enter anything to start.\n the goal is to avoid being healthy as long as possible");
 		if (intro.equals("no")) {
 			JOptionPane.showMessageDialog(null, "U suck");
 		}
